@@ -9,6 +9,7 @@ $params = array_merge(
 
 return [
     'id' => 'app-frontend',
+    'name' => 'Сокращение ссылок',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
@@ -53,7 +54,9 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/' => 'site/index',
+                '/<hash:\w+>' => 'shortlink/shortlink/go',
+                '/' => 'shortlink/shortlink/create',
+                'shortlink/shortlink/view/<hash:\w+>' => 'shortlink/shortlink/view',
 
                 '<controller>/<id:\d+>' => '<controller>/view',
                 '<controller>/<action>' => '<controller>/<action>',
@@ -65,29 +68,6 @@ return [
                 '<module>/<controller>/<action>/<id:\d+>' => '<module>/<controller>/<action>',
                 '<module>/<controller>/<slug:[A-Za-z0-9 -_.]+>' => '<module>/<controller>/view',
             ],
-        ],
-        'jwt' => [
-            'class' => \bizley\jwt\Jwt::class,
-            'signer' => \bizley\jwt\Jwt::ES256,
-            'signingKey' => [
-                'key' => '/app/private.pem',
-                'passphrase' => '',
-                'method' => \bizley\jwt\Jwt::METHOD_FILE,
-            ],
-            'verifyingKey' => [
-                'key' => '/app/public.pem',
-                'method' => \bizley\jwt\Jwt::METHOD_FILE,
-            ],
-            'validationConstraints' => static function (\bizley\jwt\Jwt $jwt) {
-                $config = $jwt->getConfiguration();
-                return [
-                    new \Lcobucci\JWT\Validation\Constraint\SignedWith($config->signer(), $config->verificationKey()),
-                    new \Lcobucci\JWT\Validation\Constraint\LooseValidAt(
-                        new \Lcobucci\Clock\SystemClock(new \DateTimeZone(\Yii::$app->timeZone)),
-                        new \DateInterval('PT10S')
-                    ),
-                ];
-            },
         ],
     ],
     'params' => $params,

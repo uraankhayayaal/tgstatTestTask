@@ -18,5 +18,6 @@ return [
         ],
     ],
     'modules' => [
+        'shortlink' => 'common\modules\shortlink\Module',
     ],
 ];

@@ -16,11 +16,9 @@ parameters:
         - stdClass
     ignoreErrors:
         - '#Call to an undefined static method Yii::setAlias\(\)#'
-        - '#Call to an undefined static method Yii::getAlias\(\)#'
         - '#Call to an undefined static method Yii::error\(\)#'
         - '#Access to an undefined property yii\\web\\IdentityInterface::\$username#'
         - '#Call to an undefined static method Yii::powered\(\)#'
-        - '#Access to an undefined property __Application|yii\\console\\Application|yii\\web\\Application::\$jwt#'
         - '#Access to an undefined static property Yii::\$container#'
         - '#Call to an undefined static method Yii::createObject\(\)#'
         - '#Call to an undefined method yii\\db\\ActiveRecordInterface::validate\(\)#'

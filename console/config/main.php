@@ -26,6 +26,7 @@ return [
             'migrationPath' => [
                 '@console/migrations',
                 '@yii/rbac/migrations',
+                '@common/modules/shortlink/migrations',
             ],
         ],
     ],
